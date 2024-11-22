@@ -1,15 +1,14 @@
 name: Notify Main Repo
-on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
 jobs:
-  notify-main-repo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Main Repo Workflow
-        run: |
-          curl -X POST -H "Authorization: token ${{ secrets.PAT }}" \
-          -d '{"event_type": "update-docs"}' \
-          https://api.github.com/repos/danielrosehill/Documentation-Root/dispatches
+notify-main-repo:
+runs-on: ubuntu-latest
+steps:
+- name: Trigger Main Repo Workflow
+run: |
+  curl -X POST -H "Authorization: token ${{ secrets.PAT }}" \
+  -d '{"event_type": "update-docs"}' \
+  https://api.github.com/repos/danielrosehill/Documentation-Root/dispatches
