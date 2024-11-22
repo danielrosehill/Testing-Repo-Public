@@ -3,16 +3,19 @@ name: Notify Main Repository
 on:
   push:
     branches:
-      - main  # Adjust if your default branch is different
+      - main # Adjust if your default branch is different
 
 jobs:
   notify:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Trigger Main Repository Workflow
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.DEPLOY_PAT }}
-          repository: danielrosehill/Documentation-Root-Repo
-          event-type: feeder-updated
-          client-payload: '{"feeder": "${{ github.repository }}"}'
+      - name: Send notification to main repo
+        env:
+          PAT: ${{ secrets.DEPLOY_PAT }}
+        run: |
+          curl -X POST \
+            -H "Authorization: token $PAT" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/danielrosehill/Documetation-Root-Repo/dispatches \
+            -d '{"event_type": "update_from_feeder"}'
