@@ -15,4 +15,4 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.DEPLOY_PAT }}" \
           https://api.github.com/repos/danielrosehill/Documentation-Root-Repo/actions/workflows/pull-and-build.yml/dispatches \
-          -d '{"ref":"main"}'
+          -d '{"ref":"main"}' || echo "Failed to trigger main repository workflow"
