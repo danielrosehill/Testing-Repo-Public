@@ -12,6 +12,6 @@ jobs:
       - name: Trigger workflow dispatch in main repo
         uses: peter-evans/repository-dispatch@v2
         with:
-          repository: danielrosehill/Documetation-Root-Repo
+          repository: danielrosehill/Documentation-Root-Repo
           event-type: feeder-update
           token: ${{ secrets.PAT }}
