@@ -1,1 +1,3 @@
-# Test Note 2
+# Second Note
+
+The sky is blue
