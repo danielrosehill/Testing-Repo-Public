@@ -1,17 +1,17 @@
 name: Notify Main Repository
-
 on:
   push:
     branches:
-      - main  # Replace with the default branch if different
+      - main  # Adjust branch as needed
 
 jobs:
-  notify:
+  dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger workflow dispatch in main repo
-        uses: peter-evans/repository-dispatch@v2
+      - name: Trigger Main Repository Workflow
+        uses: peter-evans/repository-dispatch@v1
         with:
-          repository: danielrosehill/Documentation-Root-Repo
-          event-type: feeder-update
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.PAT }}  # Personal Access Token with repo scope
+          repository: danielrosehill/Documetation-Root-Repo
+          event-type: update
+          client-payload: '{"module": "My_Tech_Stack"}'
