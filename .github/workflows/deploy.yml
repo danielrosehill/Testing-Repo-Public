@@ -8,14 +8,11 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Send notification to main repo
-        env:
-          PAT: ${{ secrets.DEPLOY_PAT }}
+      - name: Trigger Main Repository Workflow
         run: |
           curl -X POST \
-            -H "Authorization: token $PAT" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/danielrosehill/Documetation-Root-Repo/dispatches \
-            -d '{"event_type": "update_from_feeder", "client_payload": {"branch": "published"}}'
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.DEPLOY_PAT }}" \
+          https://api.github.com/repos/danielrosehill/Documentation-Root-Repo/actions/workflows/pull-and-build.yml/dispatches \
+          -d '{"ref":"main"}'
