@@ -1,0 +1,18 @@
+name: Notify Main Repository
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch name if different
+
+jobs:
+  notify-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch event
+        run: |
+          curl -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.PAT }}" \
+          https://api.github.com/repos/<main-repo-owner>/<main-repo-name>/dispatches \
+          -d '{"event_type":"feeder_update","client_payload":{"feeder":"${{ github.repository }}"}}'
